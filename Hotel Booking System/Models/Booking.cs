@@ -12,7 +12,8 @@ namespace Hotel_Booking_System.Models
         public DateTime ? CancelledAt { get; set; }
         public DateTime ? UpdatedAt { get; set; }
         public BookingStatus BookingStatus { get; set; }
-        public bool IsPaid { get; set; }
+        public int NumberOfGuests { get; set; }
+        public double TotalAmount { get; set; }
         public User User { get; set; }
         public Hotel Hotel { get; set; }
         public Room Room { get; set; }
