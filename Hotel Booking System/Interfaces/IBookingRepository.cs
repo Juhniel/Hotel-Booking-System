@@ -6,9 +6,10 @@ namespace Hotel_Booking_System.Interfaces
     {
         ICollection<Booking> GetBookings();
         Booking GetBooking(int id);
-        ICollection<Booking> GetBookingsByUser(User user);
+        ICollection<Booking> GetBookingsByUserId(int userId);
         ICollection<Booking> GetBookingsByUserName(string userName);
         ICollection<Booking> GetBookingsByEmail(string email);
+        bool BookingExists(int id);
         bool CreateBooking (Booking booking);
         bool UpdateBooking (Booking booking);
         bool DeleteBooking (int id);
