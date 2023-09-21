@@ -22,7 +22,8 @@ namespace Hotel_Booking_System.Data
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.User)
                 .WithMany(u => u.Bookings)
-                .HasForeignKey(b => b.UserId);
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Cascading delete from User to Booking
 
             // Booking to Hotel
             // Many-to-One
@@ -30,7 +31,8 @@ namespace Hotel_Booking_System.Data
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Hotel)
                 .WithMany(h => h.Bookings)
-                .HasForeignKey(b => b.HotelId);
+                .HasForeignKey(b => b.HotelId)
+                .OnDelete(DeleteBehavior.NoAction); // No action when a Hotel is deleted
 
             // Booking-to-Room
             // Many-to-One
@@ -38,7 +40,8 @@ namespace Hotel_Booking_System.Data
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Room)
                 .WithMany(r => r.Bookings)
-                .HasForeignKey(b => b.RoomId);
+                .HasForeignKey(b => b.RoomId)
+                .OnDelete(DeleteBehavior.NoAction); // No action when a Room is deleted
 
             // Booking-to-Payment
             // One-to-One
@@ -46,7 +49,8 @@ namespace Hotel_Booking_System.Data
             modelBuilder.Entity<Booking>()
                  .HasOne(b => b.Payment)
                  .WithOne(p => p.Booking)
-                 .HasForeignKey<Booking>(b => b.PaymentId);
+                 .HasForeignKey<Booking>(b => b.PaymentId)
+                 .OnDelete(DeleteBehavior.Cascade); // Cascading delete from Booking to Payment
 
             // Hotel-to-Room
             // One-to-Many
@@ -54,7 +58,8 @@ namespace Hotel_Booking_System.Data
             modelBuilder.Entity<Hotel>()
                 .HasMany(h => h.Rooms)
                 .WithOne(r => r.Hotel)
-                .HasForeignKey(r => r.HotelId);
+                .HasForeignKey(r => r.HotelId)
+                .OnDelete(DeleteBehavior.Cascade); // Cascading delete from Hotel to Room
 
             // User-to-Payment
             // One-to-Many
@@ -62,7 +67,8 @@ namespace Hotel_Booking_System.Data
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.User)
                 .WithMany(u => u.Payments) 
-                .HasForeignKey(p => p.UserId);
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.NoAction); // No action when a User is deleted
         }
     }
 }
